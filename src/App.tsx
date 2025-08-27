@@ -1,12 +1,17 @@
 import { CardWithForm } from "./components/forms/CardWithForm"
-import './App.css'
+import { Header } from "./components/layout/Header"
+import'./App.css'
 
 function App() {
 
   return (
     <>
-      <CardWithForm>
-      </CardWithForm>
+      <Header>
+      </Header>
+      <div className="container">
+        <CardWithForm>
+        </CardWithForm>
+      </div>
     </>
   )
 }
