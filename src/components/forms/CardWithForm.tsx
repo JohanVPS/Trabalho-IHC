@@ -11,11 +11,11 @@ export const CardWithForm = () => (
     <Card.Body>
       <Stack gap="4" w="full">
         <Field.Root>
-          <Field.Label>First Name</Field.Label>
+          <Field.Label>Email</Field.Label>
           <Input />
         </Field.Root>
         <Field.Root>
-          <Field.Label>Last Name</Field.Label>
+          <Field.Label>Senha</Field.Label>
           <Input />
         </Field.Root>
       </Stack>
