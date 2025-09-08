@@ -102,9 +102,13 @@ const Register: React.FC = () => {
         />
       </div>
 
-      <Button text="Cadastrar" type="submit" className="mt-4 mb-3" />
+      <div className="mt-4 mb-2">
+        <Button text="Cadastrar" type="submit" />
+      </div>
 
-      <LinkText text="Já tem uma conta?" linkText="Fazer login" href="#" />
+      <div className="mt-1">
+        <LinkText text="Já tem uma conta?" linkText="Fazer login" href="#" />
+      </div>
     </form>
   );
 

@@ -5,7 +5,7 @@ $secondary: #ff6600;
 
 .layout-container {
   width: 900px;
-  height: 500px;
+  /* height: 500px; */
   border-radius: 20px;
   overflow: hidden;
   display: flex;
@@ -63,6 +63,6 @@ $secondary: #ff6600;
 }
 
 .btn-dark:hover {
-  background-color: #1a73e8;
+  background-color: #0a0f1d;
   border: none;
 }
