@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
@@ -6,6 +7,8 @@ import LinkText from '../components/LinkText';
 import twitchLogo from '../assets/react.svg'; // Replace with actual Twitch logo path if available
 
 const Register: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nomeCompleto: '',
     telefone: '',
@@ -30,7 +33,7 @@ const Register: React.FC = () => {
     <>
       <img src={twitchLogo} alt="Twitch Logo" style={{ width: 80, marginBottom: 20 }} />
       <h3>React.tv</h3>
-      <Button text="Entrar" className="btn btn-outline-light mt-3 px-4" />
+      <Button text="Entrar" className="btn btn-outline-light mt-3 px-4" onClick={() => navigate('/login')} />
     </>
   );
 
@@ -107,7 +110,7 @@ const Register: React.FC = () => {
       </div>
 
       <div className="mt-1">
-        <LinkText text="Já tem uma conta?" linkText="Fazer login" href="#" />
+        <LinkText text="Já tem uma conta?" linkText="Fazer login" href="/login" />
       </div>
     </form>
   );

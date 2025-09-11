@@ -7,6 +7,7 @@ interface InputFieldProps {
   name: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -16,6 +17,7 @@ const InputField: React.FC<InputFieldProps> = ({
   name,
   value,
   onChange,
+  error,
 }) => {
   return (
     <div className="mb-3">
@@ -24,13 +26,14 @@ const InputField: React.FC<InputFieldProps> = ({
       </label>
       <input
         type={type}
-        className="form-control"
+        className={`form-control ${error ? 'is-invalid' : ''}`}
         id={name}
         name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
       />
+      {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );
 };

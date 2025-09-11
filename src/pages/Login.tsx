@@ -1,0 +1,80 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Layout from '../components/Layout';
+import InputField from '../components/InputField';
+import Button from '../components/Button';
+import LinkText from '../components/LinkText';
+import twitchLogo from '../assets/react.svg'; // Replace with actual Twitch logo path if available
+
+const Login: React.FC = () => {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    nomeCompleto: '',
+    email: '',
+    senha: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Add login submission logic here
+    console.log('Login submitted', formData);
+  };
+
+  const leftPanel = (
+    <>
+      <img src={twitchLogo} alt="Twitch Logo" style={{ width: 80, marginBottom: 20 }} />
+      <h3>Twitch.tv</h3>
+      <Button text="Cadastrar" className="btn btn-outline-light mt-3 px-4" onClick={() => navigate('/register')} />
+    </>
+  );
+
+  const rightPanel = (
+    <form onSubmit={handleSubmit}>
+      <h2 className="mb-1">Fazer Login</h2>
+      <p className="text-muted mb-4">Preencha seus dados</p>
+
+      <InputField
+        label="Nome Completo"
+        placeholder="Insira o seu nome"
+        name="nomeCompleto"
+        value={formData.nomeCompleto}
+        onChange={handleChange}
+      />
+
+      <InputField
+        label="E-mail"
+        placeholder="Insira o seu e-mail"
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+
+      <InputField
+        label="Senha"
+        placeholder="Insira a sua Senha"
+        name="senha"
+        type="password"
+        value={formData.senha}
+        onChange={handleChange}
+      />
+
+      <div className="mt-4 mb-2">
+        <Button text="Entrar" type="submit" />
+      </div>
+
+      <div className="mt-1">
+        <LinkText text="Não tem uma conta?" linkText="Cadastrar-se" href="/register" />
+      </div>
+    </form>
+  );
+
+  return <Layout leftPanel={leftPanel} rightPanel={rightPanel} />;
+};
+
+export default Login;
