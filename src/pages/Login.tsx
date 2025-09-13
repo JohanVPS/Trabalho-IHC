@@ -45,6 +45,7 @@ const Login: React.FC = () => {
         name="nomeCompleto"
         value={formData.nomeCompleto}
         onChange={handleChange}
+        larger={true}
       />
 
       <EmailInputField
@@ -53,6 +54,7 @@ const Login: React.FC = () => {
         name="email"
         value={formData.email}
         onChange={handleChange}
+        larger={true}
       />
 
       <InputField
@@ -62,6 +64,7 @@ const Login: React.FC = () => {
         type="password"
         value={formData.senha}
         onChange={handleChange}
+        larger={true}
       />
 
       <div className="mt-4 mb-2">

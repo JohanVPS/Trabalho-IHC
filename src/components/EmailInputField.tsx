@@ -7,6 +7,7 @@ interface EmailInputFieldProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  larger?: boolean;
 }
 
 const EmailInputField: React.FC<EmailInputFieldProps> = ({
@@ -16,6 +17,7 @@ const EmailInputField: React.FC<EmailInputFieldProps> = ({
   value = '',
   onChange,
   error,
+  larger = false,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   const [emailError, setEmailError] = useState<string>('');
@@ -54,7 +56,7 @@ const EmailInputField: React.FC<EmailInputFieldProps> = ({
       </label>
       <input
         type="email"
-        className={`form-control form-control-sm ${(error || emailError) ? 'is-invalid' : ''}`}
+        className={`form-control ${larger ? 'form-control-larger' : 'form-control-sm'} ${(error || emailError) ? 'is-invalid' : ''}`}
         id={name}
         name={name}
         placeholder={placeholder}

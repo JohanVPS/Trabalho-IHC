@@ -132,6 +132,7 @@ const Register: React.FC = () => {
         name="nomeCompleto"
         value={formData.nomeCompleto}
         onChange={handleChange}
+        larger={true}
       />
 
       <div className="input-group-container">
@@ -141,6 +142,7 @@ const Register: React.FC = () => {
           name="telefone"
           value={formData.telefone}
           onChange={handleChange}
+          larger={true}
           // A máscara será aplicada automaticamente pelo nome do campo
         />
         <InputField
@@ -149,6 +151,7 @@ const Register: React.FC = () => {
           name="cpf"
           value={formData.cpf}
           onChange={handleChange}
+          larger={true}
           // A máscara será aplicada automaticamente pelo nome do campo
         />
       </div>
@@ -161,6 +164,7 @@ const Register: React.FC = () => {
           value={formData.email}
           onChange={handleChange}
           error={formErrors.email}
+          larger={true}
         />
         <EmailInputField
           label="Confirmar E-mail"
@@ -169,6 +173,7 @@ const Register: React.FC = () => {
           value={formData.confirmarEmail}
           onChange={handleChange}
           error={formErrors.confirmarEmail}
+          larger={true}
         />
       </div>
 
@@ -182,6 +187,7 @@ const Register: React.FC = () => {
             value={formData.senha}
             onChange={handleChange}
             error={formErrors.senha}
+            larger={true}
           />
           {formData.senha && (
             <div className="mt-1 password-requirements">
@@ -205,6 +211,7 @@ const Register: React.FC = () => {
             value={formData.confirmarSenha}
             onChange={handleChange}
             error={formErrors.confirmarSenha}
+            larger={true}
           />
         </div>
       </div>

@@ -8,6 +8,7 @@ interface InputFieldProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
+  larger?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -18,6 +19,7 @@ const InputField: React.FC<InputFieldProps> = ({
   value = '',
   onChange,
   error,
+  larger = false,
 }) => {
   const [inputValue, setInputValue] = useState(value);
 
@@ -106,7 +108,7 @@ const InputField: React.FC<InputFieldProps> = ({
       </label>
       <input
         type={type}
-        className={`form-control form-control-sm ${error ? 'is-invalid' : ''}`}
+        className={`form-control ${larger ? 'form-control-larger' : 'form-control-sm'} ${error ? 'is-invalid' : ''}`}
         id={name}
         name={name}
         placeholder={placeholder}
