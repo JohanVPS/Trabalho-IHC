@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import InputField from '../components/InputField';
+import EmailInputField from '../components/EmailInputField';
 import Button from '../components/Button';
 import LinkText from '../components/LinkText';
 import twitchLogo from '../assets/react.svg'; // Replace with actual Twitch logo path if available
@@ -27,7 +28,7 @@ const Login: React.FC = () => {
 
   const leftPanel = (
     <>
-      <img src={twitchLogo} alt="Twitch Logo" style={{ width: 80, marginBottom: 20 }} />
+      <img src={twitchLogo} alt="Twitch Logo" className="img-fluid" style={{ maxWidth: 80, marginBottom: '1rem' }} />
       <h3>Twitch.tv</h3>
       <Button text="Cadastrar" className="btn btn-outline-light mt-3 px-4" onClick={() => navigate('/register')} />
     </>
@@ -46,11 +47,10 @@ const Login: React.FC = () => {
         onChange={handleChange}
       />
 
-      <InputField
+      <EmailInputField
         label="E-mail"
         placeholder="Insira o seu e-mail"
         name="email"
-        type="email"
         value={formData.email}
         onChange={handleChange}
       />

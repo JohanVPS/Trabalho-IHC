@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ leftPanel, rightPanel }) => {
       <div className="left-panel d-flex flex-column align-items-center justify-content-center text-white">
         {leftPanel}
       </div>
-      <div className="right-panel p-5 flex-grow-1 bg-white">
+      <div className="right-panel flex-grow-1 bg-white">
         {rightPanel}
       </div>
     </div>
