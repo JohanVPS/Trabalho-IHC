@@ -132,7 +132,7 @@ const InputField: React.FC<InputFieldProps> = ({
           </button>
         )}
       </div>
-      {error && <div className="invalid-feedback">{error}</div>}
+      {error && <div className="invalid-feedback d-block">{error}</div>}
       {required && !error && !inputValue.trim() && <div className="text-danger" style={{fontSize: '0.8rem'}}>Campo obrigatório</div>}
     </div>
   );
