@@ -9,6 +9,7 @@ interface InputFieldProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
   larger?: boolean;
+  required?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -20,8 +21,10 @@ const InputField: React.FC<InputFieldProps> = ({
   onChange,
   error,
   larger = false,
+  required = false,
 }) => {
   const [inputValue, setInputValue] = useState(value);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setInputValue(value);
@@ -104,18 +107,33 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <div className="mb-3">
       <label htmlFor={name} className="form-label mb-1">
-        {label}
+        {label}{required && <span className="text-danger">*</span>}
       </label>
-      <input
-        type={type}
-        className={`form-control ${larger ? 'form-control-larger' : 'form-control-sm'} ${error ? 'is-invalid' : ''}`}
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        value={inputValue}
-        onChange={handleInputChange}
-      />
+      <div className="position-relative">
+        <input
+          type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
+          className={`form-control ${larger ? 'form-control-larger' : 'form-control-sm'} ${error ? 'is-invalid' : ''} ${type === 'password' ? 'pe-5' : ''}`}
+          id={name}
+          name={name}
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={handleInputChange}
+          style={{ paddingRight: type === 'password' && error ? '3.8rem' : type === 'password' ? '2.5rem' : error ? '2rem' : '0.75rem' }}
+        />
+        {type === 'password' && (
+          <button 
+            type="button" 
+            className="btn btn-link position-absolute top-50 translate-middle-y text-decoration-none border-0 p-0"
+            style={{ right: error ? '2.2rem' : '0.75rem', zIndex: 5 }}
+            onClick={() => setShowPassword(!showPassword)}
+            tabIndex={-1}
+          >
+            <i className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
+          </button>
+        )}
+      </div>
       {error && <div className="invalid-feedback">{error}</div>}
+      {required && !error && !inputValue.trim() && <div className="text-danger" style={{fontSize: '0.8rem'}}>Campo obrigatório</div>}
     </div>
   );
 };

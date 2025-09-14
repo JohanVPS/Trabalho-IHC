@@ -5,6 +5,7 @@ interface ButtonProps {
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
   className?: string;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,9 +13,10 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   type = 'button',
   className = 'btn btn-dark w-100',
+  disabled = false,
 }) => {
   return (
-    <button type={type} className={className} onClick={onClick}>
+    <button type={type} className={className} onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );

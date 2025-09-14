@@ -8,6 +8,7 @@ interface EmailInputFieldProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
   larger?: boolean;
+  required?: boolean;
 }
 
 const EmailInputField: React.FC<EmailInputFieldProps> = ({
@@ -18,6 +19,7 @@ const EmailInputField: React.FC<EmailInputFieldProps> = ({
   onChange,
   error,
   larger = false,
+  required = false,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   const [emailError, setEmailError] = useState<string>('');
@@ -52,7 +54,7 @@ const EmailInputField: React.FC<EmailInputFieldProps> = ({
   return (
     <div className="mb-3">
       <label htmlFor={name} className="form-label mb-1">
-        {label}
+        {label}{required && <span className="text-danger">*</span>}
       </label>
       <input
         type="email"
@@ -64,6 +66,7 @@ const EmailInputField: React.FC<EmailInputFieldProps> = ({
         onChange={handleEmailChange}
       />
       {(error || emailError) && <div className="invalid-feedback">{error || emailError}</div>}
+      {required && !error && !emailError && !inputValue.trim() && <div className="text-danger" style={{fontSize: '0.8rem'}}>Campo obrigatório</div>}
     </div>
   );
 };

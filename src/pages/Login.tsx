@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import InputField from '../components/InputField';
@@ -15,6 +15,14 @@ const Login: React.FC = () => {
     email: '',
     senha: '',
   });
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // Verifica se todos os campos obrigatórios estão preenchidos
+  useEffect(() => {
+    const { email, senha } = formData;
+    setIsFormValid(email.trim() !== '' && senha.trim() !== '');
+  }, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,14 +47,14 @@ const Login: React.FC = () => {
       <h2 className="mb-1">Fazer Login</h2>
       <p className="text-muted mb-4">Preencha seus dados</p>
 
-      <InputField
+      {/* <InputField
         label="Nome Completo"
         placeholder="Insira o seu nome"
         name="nomeCompleto"
         value={formData.nomeCompleto}
         onChange={handleChange}
         larger={true}
-      />
+      /> */}
 
       <EmailInputField
         label="E-mail"
@@ -55,6 +63,7 @@ const Login: React.FC = () => {
         value={formData.email}
         onChange={handleChange}
         larger={true}
+        required={true}
       />
 
       <InputField
@@ -65,14 +74,18 @@ const Login: React.FC = () => {
         value={formData.senha}
         onChange={handleChange}
         larger={true}
+        required={true}
       />
 
       <div className="mt-4 mb-2">
-        <Button text="Entrar" type="submit" />
+        <Button text="Entrar" type="submit" disabled={!isFormValid} />
       </div>
 
       <div className="mt-1">
         <LinkText text="Não tem uma conta?" linkText="Cadastrar-se" href="/register" />
+      </div>
+      <div className="mt-1">
+        <LinkText text="" linkText="Esqueci a senha" onClick={() => alert('Funcionalidade de recuperação de senha será implementada em breve!')} />
       </div>
     </form>
   );

@@ -11,7 +11,8 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    nomeCompleto: '',
+    nome: '',
+    sobrenome: '',
     telefone: '',
     cpf: '',
     email: '',
@@ -26,6 +27,8 @@ const Register: React.FC = () => {
     senha: '',
     confirmarSenha: '',
   });
+
+  const [isFormValid, setIsFormValid] = useState(false);
   
   // Estado para controlar a validação de requisitos da senha
   const [passwordRequirements, setPasswordRequirements] = useState({
@@ -44,6 +47,25 @@ const Register: React.FC = () => {
       setFormErrors(prev => ({ ...prev, confirmarEmail: '' }));
     }
   }, [formData.email, formData.confirmarEmail]);
+
+  // Verificar se todos os campos obrigatórios estão preenchidos
+  useEffect(() => {
+    const { nome, sobrenome, email, confirmarEmail, senha, confirmarSenha } = formData;
+    const hasNoErrors = Object.values(formErrors).every(error => error === '');
+    const requiredFieldsFilled = [
+      nome.trim(),
+      sobrenome.trim(),
+      email.trim(),
+      confirmarEmail.trim(),
+      senha.trim(),
+      confirmarSenha.trim()
+    ].every(field => field !== '');
+    
+    // Verifica se todos os requisitos da senha foram atendidos
+    const allPasswordRequirementsMet = Object.values(passwordRequirements).every(req => req);
+    
+    setIsFormValid(requiredFieldsFilled && hasNoErrors && allPasswordRequirementsMet);
+  }, [formData, formErrors, passwordRequirements]);
 
   // Validar os requisitos da senha
   useEffect(() => {
@@ -126,14 +148,26 @@ const Register: React.FC = () => {
       <h2 className="mb-1">Crie sua conta</h2>
       <p className="text-muted mb-4">Preencha seus dados</p>
 
-      <InputField
-        label="Nome Completo"
-        placeholder="Insira o seu nome"
-        name="nomeCompleto"
-        value={formData.nomeCompleto}
-        onChange={handleChange}
-        larger={true}
-      />
+      <div className="input-group-container">
+        <InputField
+          label="Nome"
+          placeholder="Insira o seu nome"
+          name="nome"
+          value={formData.nome}
+          onChange={handleChange}
+          larger={true}
+          required={true}
+        />
+        <InputField
+          label="Sobrenome"
+          placeholder="Insira o seu sobrenome"
+          name="sobrenome"
+          value={formData.sobrenome}
+          onChange={handleChange}
+          larger={true}
+          required={true}
+        />
+      </div>
 
       <div className="input-group-container">
         <InputField
@@ -165,6 +199,7 @@ const Register: React.FC = () => {
           onChange={handleChange}
           error={formErrors.email}
           larger={true}
+          required={true}
         />
         <EmailInputField
           label="Confirmar E-mail"
@@ -174,6 +209,7 @@ const Register: React.FC = () => {
           onChange={handleChange}
           error={formErrors.confirmarEmail}
           larger={true}
+          required={true}
         />
       </div>
 
@@ -188,6 +224,7 @@ const Register: React.FC = () => {
             onChange={handleChange}
             error={formErrors.senha}
             larger={true}
+            required={true}
           />
           {formData.senha && (
             <div className="mt-1 password-requirements">
@@ -212,12 +249,13 @@ const Register: React.FC = () => {
             onChange={handleChange}
             error={formErrors.confirmarSenha}
             larger={true}
+            required={true}
           />
         </div>
       </div>
 
       <div className="mt-4 mb-2">
-        <Button text="Cadastrar" type="submit" />
+        <Button text="Cadastrar" type="submit" disabled={!isFormValid} />
       </div>
 
       <div className="mt-1">
