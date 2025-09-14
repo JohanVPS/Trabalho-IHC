@@ -17,15 +17,35 @@ const Login: React.FC = () => {
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
-  // Verifica se todos os campos obrigatórios estão preenchidos
+  // Função para validar o formato do e-mail
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Verifica se todos os campos obrigatórios estão preenchidos e válidos
   useEffect(() => {
     const { email, senha } = formData;
-    setIsFormValid(email.trim() !== '' && senha.trim() !== '');
-  }, [formData]);
+    const isEmailValid = email.trim() !== '' && isValidEmail(email);
+    const isSenhaValid = senha.trim() !== '';
+    const isValid = isEmailValid && isSenhaValid;
+    setIsFormValid(isValid);
+  }, [formData.email, formData.senha]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Atualiza o estado de erro do email, se necessário
+    if (name === 'email') {
+      if (value.trim() !== '' && !isValidEmail(value)) {
+        setEmailError('Formato de e-mail inválido');
+      } else {
+        setEmailError('');
+      }
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -62,6 +82,7 @@ const Login: React.FC = () => {
         name="email"
         value={formData.email}
         onChange={handleChange}
+        error={emailError}
         larger={true}
         required={true}
       />

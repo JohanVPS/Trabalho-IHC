@@ -65,7 +65,16 @@ const Register: React.FC = () => {
     const allPasswordRequirementsMet = Object.values(passwordRequirements).every(req => req);
     
     setIsFormValid(requiredFieldsFilled && hasNoErrors && allPasswordRequirementsMet);
-  }, [formData, formErrors, passwordRequirements]);
+  }, [
+    formData.nome,
+    formData.sobrenome,
+    formData.email,
+    formData.confirmarEmail,
+    formData.senha,
+    formData.confirmarSenha,
+    formErrors,
+    passwordRequirements
+  ]);
 
   // Validar os requisitos da senha
   useEffect(() => {
