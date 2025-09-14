@@ -13,11 +13,11 @@ const LinkText: React.FC<LinkTextProps> = ({ text, linkText, href, onClick }) =>
     <p className="text-center mt-3 text-muted">
       {text} {
         href ? (
-          <Link to={href} className="fw-bold text-decoration-none">
+          <Link to={href} className="fw-bold text-decoration-none" style={{ color: '#0e1428' }}>
             {linkText}
           </Link>
         ) : (
-          <a onClick={onClick} className="fw-bold text-decoration-none" style={{ cursor: 'pointer' }}>
+          <a onClick={onClick} className="fw-bold text-decoration-none" style={{ cursor: 'pointer', color: '#0e1428' }}>
             {linkText}
           </a>
         )
